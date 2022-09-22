@@ -207,7 +207,7 @@ export const getStatistics = async () => {
   return rawResponse.json();
 };
 //!
-export const setStatistics = async <T>(statistics: { learnedWords: number; optional: T }) => {
+export const setStatistics = async <T>(statistics: T) => {
   const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
