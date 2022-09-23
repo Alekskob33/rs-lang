@@ -1,6 +1,6 @@
 import { StatDataType, AnswerObj, GameNameType } from '../types';
 
-class Agregator {
+export class Agregator {
   data: StatDataType;
   // correctAnswers: void;
 
@@ -9,22 +9,22 @@ class Agregator {
   }
 
   getGameAnswersPerDay(gameName: GameNameType) {
-    const { dayAnswers } = this.data.optional.learning[gameName];
+    const { answersHistory: dayAnswers } = this.data.optional.learning[gameName];
     return dayAnswers;
   }
 
   getCorrectAnswers(answersArray: Array<AnswerObj>): Array<AnswerObj> {
-    return answersArray.filter((item) => item.isAnswerCorrect);
+    return answersArray.filter((item) => item.correctness);
   }
 
   getWrongAnswers(answersArray: Array<AnswerObj>): Array<AnswerObj> {
-    return answersArray.filter((item) => !item.isAnswerCorrect);
+    return answersArray.filter((item) => !item.correctness);
   }
 
   getMaxCorrectsAtRow(answersArray: Array<AnswerObj>): number {
     const maxArr: Array<number> = [];
     answersArray.reduce((rowCount, item, index, arr) => {
-      if (item.isAnswerCorrect) {
+      if (item.correctness) {
         rowCount += 1;
         if (index === arr.length - 1) maxArr.push(rowCount);
         return rowCount;
@@ -42,35 +42,35 @@ class Agregator {
   }
 }
 
-const testAnswersArray: AnswerObj[] = [
-  { id: 9, isAnswerCorrect: true },
-  { id: 4, isAnswerCorrect: true },
-  { id: 12, isAnswerCorrect: true },
-  { id: 7, isAnswerCorrect: false },
-  { id: 8, isAnswerCorrect: false },
-  { id: 52, isAnswerCorrect: true },
-  { id: 15, isAnswerCorrect: true },
-];
+// const testAnswersArray: AnswerObj[] = [
+//   { wordId: '9', correctness: true },
+//   { wordId: '4', correctness: true },
+//   { wordId: '12', correctness: true },
+//   { wordId: '7', correctness: false },
+//   { wordId: '8', correctness: false },
+//   { wordId: '52', correctness: true },
+//   { wordId: '15', correctness: true },
+// ];
 
-const testStatData = {
-  learnedWords: 0,
-  optional: {
-    wordsHistory: {
-      passedWords: [],
-      newWordsPerDay: [],
-    },
-    learning: {
-      audioCall: {
-        dayAnswers: testAnswersArray,
-      },
-      sprint: {
-        dayAnswers: testAnswersArray,
-      },
-    },
-  },
-};
+// const testStatData = {
+//   learnedWords: 0,
+//   optional: {
+//     wordsHistory: {
+//       passedWords: [],
+//       newWordsPerDay: [],
+//     },
+//     learning: {
+//       audioCall: {
+//         dayAnswers: testAnswersArray,
+//       },
+//       sprint: {
+//         dayAnswers: testAnswersArray,
+//       },
+//     },
+//   },
+// };
 
-const agregator = new Agregator(testStatData);
+// const agregator = new Agregator(testStatData);
 
-const answers = agregator.getGameAnswersPerDay('audioCall');
+// const answers = agregator.getGameAnswersPerDay('audioCall');
 // console.log(agregator.getPercent(answers));
