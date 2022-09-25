@@ -45,6 +45,7 @@ export class StatData {
       const dataStructure = JSON.parse(JSON.stringify(this.dataStructure)) as StatDataType;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       data = _.merge(dataStructure, data) as StatDataType; // merge with default structure
+      console.log('Данные с сервера после merge: ', data);
       // if (this.isEmpty(data)) data = await this.initStat();
       delete data.id;
       return (this.stat = data);
@@ -56,14 +57,6 @@ export class StatData {
   addAnswer(gameName: GameNameType, answerObj: AnswerObj) {
     const date = new Date().toLocaleDateString('ru');
     const { answersHistory } = this.stat.optional.learning[gameName];
-    // initial structure
-    // let answersHistory: AnswersHistory | EmptyHistory;
-    // if (this.stat.optional?.learning?.[gameName]?.answersHistory) {
-    //   answersHistory = this.stat.optional.learning[gameName].answersHistory;
-    // } else {
-    //   this.stat.optional.learning = { [gameName]: { answersHistory: {} } };
-    //   answersHistory = this.stat.optional.learning[gameName].answersHistory;
-    // }
 
     if (answersHistory[date]) {
       answersHistory[date].push(answerObj);
@@ -86,8 +79,10 @@ export class StatData {
     // add in NewWords
     if (!(date in newWordsByDate)) {
       newWordsByDate[date] = [wordId];
+      console.log('new-word History has been initialized by word: ', wordId);
     } else {
       newWordsByDate[date].push(wordId);
+      console.log('new word has been added: ', wordId);
     }
 
     // add in PassedWords
@@ -129,7 +124,7 @@ export class StatData {
     try {
       const body = (await setStatistics<StatDataType>(data)) as StatDataType;
       console.log('The Statistics has been successfully saved:');
-      console.log('от сервера ответ с такими данными:');
+      console.log('от сервера получаем такие данные:');
       console.dir(body);
     } catch (err) {
       console.log(err);
