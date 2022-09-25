@@ -6,6 +6,7 @@ import LocalStat from './localStat';
 import Render from './render';
 
 import { StatData } from '../../statistics/Model/statData';
+import { Agregator } from '../../statistics/Model/agregator';
 
 class Game extends Step {
   gameName: GameNameType;
@@ -107,8 +108,10 @@ class Game extends Step {
         this.showTips();
         this.disableChoice();
         const answerData = this.localStat.registerAnswer(e);
-        // console.dir(answerData);
+        // write in history
         this.statData.addAnswer('audioCall', answerData);
+        this.statData.addWordsHistory('audioCall', answerData);
+        console.dir(this.statData.stat);
 
         setTimeout(() => {
           if (this.hasNext()) {
@@ -116,6 +119,11 @@ class Game extends Step {
           } else {
             this.showResults();
             this.statData.saveStat().catch((err) => console.warn(err));
+
+            // test agregator
+            // const agregator = new Agregator(this.statData.stat);
+            // const dayAnswers = agregator.getDayAnswers('audioCall');
+            // console.log('dayAnswers: ', dayAnswers);
           }
         }, 1000);
       }
@@ -124,6 +132,20 @@ class Game extends Step {
 }
 
 export const game = new Game();
+
+// const stat = new StatData();
+// stat.resetAllStat();
+// stat.resetAllStat();
+
+// stat
+//   .saveStat()
+//   .then((data) => console.dir(data))
+//   .catch((err) => console.log(err));
+
+// stat
+//   .getStat()
+//   .then((data) => console.dir(data))
+//   .catch((err) => console.log(err));
 
 // import { setStatistics, getStatistics } from '../../api/api';
 

@@ -2,28 +2,31 @@ import { StatDataType, AnswerObj, GameNameType } from '../types';
 
 export class Agregator {
   data: StatDataType;
+  currentDate: string;
   // correctAnswers: void;
 
   constructor(data: StatDataType) {
     this.data = data;
+    this.currentDate = new Date().toLocaleDateString();
   }
 
-  getGameAnswersPerDay(gameName: GameNameType) {
-    const { answersHistory: dayAnswers } = this.data.optional.learning[gameName];
-    return dayAnswers;
+  getDayAnswers(gameName: GameNameType) {
+    const { answersHistory } = this.data.optional.learning[gameName];
+    const dayAnswers = answersHistory[this.currentDate];
+    return dayAnswers ? dayAnswers : [];
   }
 
-  getCorrectAnswers(answersArray: Array<AnswerObj>): Array<AnswerObj> {
-    return answersArray.filter((item) => item.correctness);
+  getCorrectAnswers(dayAnswers: Array<AnswerObj>): Array<AnswerObj> {
+    return dayAnswers.filter((item) => item.correctness);
   }
 
-  getWrongAnswers(answersArray: Array<AnswerObj>): Array<AnswerObj> {
-    return answersArray.filter((item) => !item.correctness);
+  getWrongAnswers(dayAnswers: Array<AnswerObj>): Array<AnswerObj> {
+    return dayAnswers.filter((item) => !item.correctness);
   }
 
-  getMaxCorrectsAtRow(answersArray: Array<AnswerObj>): number {
+  getMaxCorrectAnswersChain(dayAnswers: Array<AnswerObj>): number {
     const maxArr: Array<number> = [];
-    answersArray.reduce((rowCount, item, index, arr) => {
+    dayAnswers.reduce((rowCount, item, index, arr) => {
       if (item.correctness) {
         rowCount += 1;
         if (index === arr.length - 1) maxArr.push(rowCount);
@@ -36,9 +39,9 @@ export class Agregator {
     return Math.max(...maxArr);
   }
 
-  getPercent(answersArray: Array<AnswerObj>): string {
-    const corrects = this.getCorrectAnswers(answersArray).length;
-    return answersArray.length === 0 ? '0%' : `${((corrects / answersArray.length) * 100).toFixed(0)}%`;
+  getPercent(dayAnswers: Array<AnswerObj>): string {
+    const corrects = this.getCorrectAnswers(dayAnswers).length;
+    return dayAnswers.length === 0 ? '0%' : `${((corrects / dayAnswers.length) * 100).toFixed(0)}%`;
   }
 }
 

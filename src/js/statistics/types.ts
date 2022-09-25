@@ -4,14 +4,14 @@ export type StatDataType = {
   optional: {
     wordsHistory: {
       passedWords: Array<string>; // word id
-      newWordsPerDay: Array<string>; // word id
+      newWordsByDate: NewWords; // wordId by date
     };
     learning: {
       audioCall: {
-        answersHistory: AnswersHistory | EmptyAnswersHirstory;
+        answersHistory: AnswersHistory | EmptyHistory;
       };
       sprint: {
-        answersHistory: AnswersHistory | EmptyAnswersHirstory;
+        answersHistory: AnswersHistory | EmptyHistory;
       };
     };
   };
@@ -23,9 +23,9 @@ export type AnswerObj = {
   correctness: boolean;
 };
 
-type AnswersHistory = Record<string, AnswerObj[]>; // {'12.10.2022': [answerObj, answerObj]}
-type EmptyAnswersHirstory = Record<string, never>; // empty obj -> {}
-
+export type AnswersHistory = Record<string, AnswerObj[]>; // {'12.10.2022': [answerObj, answerObj]}
+export type EmptyHistory = Record<string, never>; // empty obj -> {}
+export type NewWords = Record<string, Array<string>>;
 // const answers: Record<string, AnswerObj[]> = {
 //   '12.10.2022': [
 //     { wordId: '234234234', correctness: true },
