@@ -1,64 +1,97 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RS Lang</title>
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RS Lang</title>
-  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-    rel="stylesheet">
-</head>
+  <body class="stat-page page">
+    <!-- HEADER -->
+    <header class="header">
+      <button class="header__btn header__btn--menu" data-popup="menu-open-button">menu</button>
+      <button class="header__btn header__btn--about" data-popup="open-about">about</button>
+      <button class="header__btn header__btn--user" data-popup="open-auth-form">user</button>
+    </header>
 
-<body class="home-page">
-  <!-- HEADER -->
-  <header class="header">
-    <button class="header__btn header__btn--menu" data-popup="menu-open-button">menu</button>
-    <button class="header__btn header__btn--about" data-popup="open-about">about</button>
-    <button class="header__btn header__btn--user" data-popup="open-auth-form">user</button>
-  </header>
+    <!-- MAIN -->
+    <main class="stat-content">
+      <h2 class="stat-title--large">Статистика</h2>
+      <h4 class="stat-title--small">Сегодня (<span class="stat-date">24.09</span>):</h4>
 
-  <!-- MAIN -->
-  <main class="stats-content">
-    <div class="stats__wrapper">
-      <h1 class="stats__title">Статистика</h1>
-      <p class="stats__sub_title"> Только авторизированные пользователи могут просматривать статистику!</p>
-    </div>
-  </main>
+      <div class="stat__table">
+        <div class="stat__table-row">
+          <div class="stat__table-cell">&nbsp;</div>
+          <div class="stat__table-cell">Аудиовызов</div>
+          <div class="stat__table-cell">Спринт</div>
+        </div>
+        <div class="stat__table-row">
+          <div class="stat__table-cell stat__table-cell--new"><span>Новых слов</span></div>
+          <div class="stat__table-cell">10</div>
+          <div class="stat__table-cell">0</div>
+        </div>
+        <div class="stat__table-row">
+          <div class="stat__table-cell stat__table-cell--percent">
+            <span>Процент правильных <br />ответов</span>
+          </div>
+          <div class="stat__table-cell">0%</div>
+          <div class="stat__table-cell">10%</div>
+        </div>
+        <div class="stat__table-row">
+          <div class="stat__table-cell stat__table-cell--max"><span>Максимальная серия</span></div>
+          <div class="stat__table-cell">20 подряд</div>
+          <div class="stat__table-cell">0 подряд</div>
+        </div>
+      </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <h3 class="footer__title">Creators' story</h3>
-    <div class="footer-row">
-      <!-- Creators -->
-      <ul class="creators-list">
-        <li class="creators-list__item">
-          <a href="https://github.com/Andreyjkov" class="creators-list__item-avatar">
-            <img src="./assets/footer/github.png" alt="">
-          </a>
-          <span class="creators-list__item-name">Andrey</span>
-        </li>
-        <li class="creators-list__item">
-          <a href="https://github.com/Alekskob33" class="creators-list__item-avatar">
-            <img src="./assets/footer/github.png" alt="">
-          </a>
-          <span class="creators-list__item-name">Alexey</span>
-        </li>
-        <li class="creators-list__item">
-          <a href="https://github.com/sergeyMikhalkin" class="creators-list__item-avatar">
-            <img src="./assets/footer/github.png" alt="">
-          </a>
-          <span class="creators-list__item-name">Sergey</span>
-        </li>
-      </ul>
-      <!-- Copyright -->
-      <span class="footer__copyright">RS Lang 2022</span>
-    </div>
-  </footer>
-</body>
+      <div class="stat__total">
+        <p class="stat__total-label">
+          Новых слов за день:
+          <span class="stat__total-value">0</span>
+        </p>
+        <p class="stat__total-label">
+          Изученных слов:
+          <span class="stat__total-value">0</span>
+        </p>
+      </div>
+    </main>
 
+    <!-- FOOTER -->
+    <footer class="footer">
+      <h3 class="footer__title">Creators' story</h3>
+      <div class="footer-row">
+        <!-- Creators -->
+        <ul class="creators-list">
+          <li class="creators-list__item">
+            <a href="https://github.com/Andreyjkov" class="creators-list__item-avatar">
+              <img src="./assets/footer/github.png" alt="" />
+            </a>
+            <span class="creators-list__item-name">Andrey</span>
+          </li>
+          <li class="creators-list__item">
+            <a href="https://github.com/Alekskob33" class="creators-list__item-avatar">
+              <img src="./assets/footer/github.png" alt="" />
+            </a>
+            <span class="creators-list__item-name">Alexey</span>
+          </li>
+          <li class="creators-list__item">
+            <a href="https://github.com/sergeyMikhalkin" class="creators-list__item-avatar">
+              <img src="./assets/footer/github.png" alt="" />
+            </a>
+            <span class="creators-list__item-name">Sergey</span>
+          </li>
+        </ul>
+        <!-- Copyright -->
+        <span class="footer__copyright">RS Lang 2022</span>
+      </div>
+    </footer>
+  </body>
 </html>

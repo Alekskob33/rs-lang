@@ -1,36 +1,43 @@
-.stats-content
-  color: white
-  background-color: #33bbba
-  margin-top: 50px
-  padding: 30px 30px
-  
-  @include phone
-    padding: 5px 5px
+.stat-page
+  display: flex
+  flex-direction: column
+  justify-content: start
 
-.stats__wrapper
-  border: 1px solid #EFEFEF
+  max-width: 768px
+  height: 100%
+  margin: 0 auto
+  padding: 0 25px
+  box-sizing: border-box
 
+  font-weight: 700
+  font-size: 16px
+  line-height: 20px
+  *
+    box-sizing: border-box
 
-.stats__title
-    display: flex
-    justify-content: center
-    padding: 10px 10px
+  @include tablet
+    padding: 0 58px
 
-.stats__table
-  margin: auto
+.stat-content
+  width: 100%
+  max-width: 486px
+  margin: 0 auto
+  padding-top: 59px
 
-  @include phone
-    font-size: 12px
+  @include tablet
+    min-width: 420px
 
-.stats__th
-  padding: 10px
-  text-align: center
+.stat-title
+  font-weight: 700
+  font-weight: normal
+  &--large
+    margin-bottom: 50px
+    font-size: 32px
+    line-height: 40px
+    text-align: center
+  &--small
+    font-size: 20px
+    line-height: 25px
 
-  @include phone
-    padding: 0px
-
-.stats__game
-  padding-right: 20px
-
-.stats__sub_title
-    padding: 10px
+@import table
+@import total

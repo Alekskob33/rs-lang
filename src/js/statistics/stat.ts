@@ -1,2 +1,1 @@
-import './Model/statData';
-import './Model/agregator';
+import './View/statView';
