@@ -131,43 +131,36 @@ class Game extends Step {
   }
 }
 
+import { StatDataType } from '../../statistics/types';
+
+const testData: StatDataType = {
+  learnedWords: 0,
+  optional: {
+    wordsHistory: {
+      passedWords: ['234234'],
+      newWordsByDate: { ['some_day']: ['111'] },
+    },
+    learning: {
+      audioCall: {
+        answersHistory: {
+          ['some_day']: [{ wordId: '11', correctness: true }],
+        },
+      },
+      sprint: {
+        answersHistory: {},
+      },
+    },
+  },
+};
+
 export const game = new Game();
 
 // const stat = new StatData();
-// stat.resetAllStat();
-// stat.resetAllStat();
+// stat.resetAllStat(); // clear statistics
+// stat.stat = testData; // save test data
 
 // stat
-//   .saveStat()
-//   .then((data) => console.dir(data))
-//   .catch((err) => console.log(err));
-
-// stat
+//   // .saveStat()
 //   .getStat()
 //   .then((data) => console.dir(data))
 //   .catch((err) => console.log(err));
-
-// import { setStatistics, getStatistics } from '../../api/api';
-
-// const data = {
-//   learnedWords: 1,
-//   optional: {},
-// };
-
-// setStatistics(data).then(
-//   (body) => {
-//     console.log(body);
-//   },
-//   (err) => {
-//     console.log(err);
-//   }
-// );
-
-// getStatistics().then(
-//   (body) => {
-//     console.log(body);
-//   },
-//   (err) => {
-//     console.log(err);
-//   }
-// );
