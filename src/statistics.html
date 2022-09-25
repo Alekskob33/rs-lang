@@ -25,7 +25,7 @@
     <!-- MAIN -->
     <main class="stat-content">
       <h2 class="stat-title--large">Статистика</h2>
-      <h4 class="stat-title--small">Сегодня (<span class="stat-date">24.09</span>):</h4>
+      <h4 class="stat-title--small"><span class="stat-date" data-stat="date">24.09</span>:</h4>
 
       <div class="stat__table">
         <div class="stat__table-row">
@@ -33,34 +33,34 @@
           <div class="stat__table-cell">Аудиовызов</div>
           <div class="stat__table-cell">Спринт</div>
         </div>
-        <div class="stat__table-row">
+        <!-- <div class="stat__table-row">
           <div class="stat__table-cell stat__table-cell--new"><span>Новых слов</span></div>
-          <div class="stat__table-cell">10</div>
-          <div class="stat__table-cell">0</div>
-        </div>
+          <div class="stat__table-cell" data-audiocall="new-words">10</div>
+          <div class="stat__table-cell" data-sprint="new-words" ->0</div>
+        </div> -->
         <div class="stat__table-row">
           <div class="stat__table-cell stat__table-cell--percent">
             <span>Процент правильных <br />ответов</span>
           </div>
-          <div class="stat__table-cell">0%</div>
-          <div class="stat__table-cell">10%</div>
+          <div class="stat__table-cell" data-audiocall="percent">0%</div>
+          <div class="stat__table-cell" data-sprint="percent">10%</div>
         </div>
         <div class="stat__table-row">
           <div class="stat__table-cell stat__table-cell--max"><span>Максимальная серия</span></div>
-          <div class="stat__table-cell">20 подряд</div>
-          <div class="stat__table-cell">0 подряд</div>
+          <div class="stat__table-cell" data-audiocall="max">20 подряд</div>
+          <div class="stat__table-cell" data-sprint="max">0 подряд</div>
         </div>
       </div>
 
       <div class="stat__total">
         <p class="stat__total-label">
           Новых слов за день:
-          <span class="stat__total-value">0</span>
+          <span class="stat__total-value" data-stat="new-words">0</span>
         </p>
-        <p class="stat__total-label">
+        <!-- <p class="stat__total-label">
           Изученных слов:
           <span class="stat__total-value">0</span>
-        </p>
+        </p> -->
       </div>
     </main>
 

@@ -26,6 +26,19 @@ export type AnswerObj = {
 export type AnswersHistory = Record<string, AnswerObj[]>; // {'12.10.2022': [answerObj, answerObj]}
 export type EmptyHistory = Record<string, never>; // empty obj -> {}
 export type NewWords = Record<string, Array<string>>;
+
+export type ViewData = {
+  date: string;
+  newWords: number;
+  audioCall: {
+    max: number;
+    percent: string;
+  };
+  sprint: {
+    max: number;
+    percent: string;
+  };
+};
 // const answers: Record<string, AnswerObj[]> = {
 //   '12.10.2022': [
 //     { wordId: '234234234', correctness: true },

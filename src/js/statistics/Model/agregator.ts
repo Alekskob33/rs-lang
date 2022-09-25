@@ -16,6 +16,10 @@ export class Agregator {
     return dayAnswers ? dayAnswers : [];
   }
 
+  getNewWords(): number {
+    return this.data.optional.wordsHistory.newWordsByDate?.[this.currentDate]?.length || 0;
+  }
+
   getCorrectAnswers(dayAnswers: Array<AnswerObj>): Array<AnswerObj> {
     return dayAnswers.filter((item) => item.correctness);
   }
