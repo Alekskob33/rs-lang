@@ -3,7 +3,8 @@ import { SignInUser } from '../interfaces/sign-in-user';
 import { User } from '../interfaces/user';
 import { getLocalStorage } from '../local-storage/local-storage';
 
-export const base = `https://rslang-data.herokuapp.com`;
+// export const base = `https://rslang-data.herokuapp.com`; // old
+export const base = `https://rs-lang-2022q1.herokuapp.com`;
 
 export const getChunkWords = async (group: number, page: number) => {
   const url = `${base}/words?page=${page}&group=${group}`;
@@ -30,7 +31,7 @@ export const createUser = async (user: User) => {
     body: JSON.stringify(user),
   });
   if (rawResponse.status === 417) {
-    alert('Пользователь с таким e-mail уже существует');
+    // alert('Пользователь с таким e-mail уже существует');
     throw Error('Пользователь с таким e-mail уже существует');
   }
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);
@@ -206,7 +207,7 @@ export const getStatistics = async () => {
   return rawResponse.json();
 };
 //!
-export const setStatistics = async <T>(statistics: { learnedWords: number; optional: T }) => {
+export const setStatistics = async <T>(statistics: T) => {
   const authData = getLocalStorage('auth') as Auth;
   const url = `${base}/users/${authData.userId}/statistics`;
   const rawResponse = await fetch(url, {
@@ -263,7 +264,7 @@ export const sigIn = async (user: SignInUser) => {
     body: JSON.stringify(user),
   });
   if (rawResponse.status == 404) {
-    alert(`Такого пользователя не существует. Проверьте правильность ввода логина и пароля`);
+    // alert(`Такого пользователя не существует. Проверьте правильность ввода логина и пароля`);
     throw Error(`Такого пользователя не существует. Проверьте правильность ввода логина и пароля`);
   }
   if (!rawResponse.ok) throw Error(`Error${rawResponse.status}`);

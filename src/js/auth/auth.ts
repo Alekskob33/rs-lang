@@ -49,6 +49,13 @@ class UserAuth {
     }
   }
 
+  isAuthorized() {
+    const userAuthData = localStorage.getItem('auth');
+    if (userAuthData && JSON.parse(userAuthData)) {
+      // userAuthData = JSON.parse(userAuthData) as {};
+    }
+  }
+
   logIn(formElem: HTMLFormElement) {
     const data = this.getFormData(formElem);
     signIn((data as unknown) as SignInUser)
@@ -98,4 +105,6 @@ class UserAuth {
 }
 
 const auth = new UserAuth();
-if (getLocalStorage('auth')) auth.toggleButtonState();
+if (getLocalStorage('auth')) {
+  auth.toggleButtonState();
+}

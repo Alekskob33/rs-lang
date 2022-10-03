@@ -1,0 +1,38 @@
+.stat__table
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-auto-rows: 1fr
+
+  margin-bottom: 35px
+  padding-top: 20px
+  padding-bottom: 30px
+  border-bottom: 2px solid #80E55D
+
+  &-row
+    display: grid
+    grid-template-columns: 50% 1fr 1fr
+    gap: 0 30px
+    align-items: center
+    padding: 10px 0
+
+    @include phone
+      grid-template-columns: 1fr repeat(2, minmax(100px, 1fr))
+      gap: 0 15px
+
+  &-cell
+    @include phone
+      &--new,
+      &--percent,
+      &--max
+        span
+          display: none
+        &::before
+          font-weight: 700
+          font-size: 14px
+      &--new::before
+        content: 'new:'
+      &--percent::before
+        content: 'okay:'
+      &--max::before
+        content: 'max:'
+        // background: url('./assets/')

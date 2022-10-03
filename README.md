@@ -1,1 +1,14 @@
 # rslang
+
+---
+
+**Тестовый пользователь:**
+
+testName
+testName@ya.ru
+testParol
+userId":"6328e9c922347b0016d418df"
+
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjhlOWM5MjIzNDdiMDAxNmQ0MThkZiIsImlhdCI6MTY2MzYyNTc1MywiZXhwIjoxNjYzNjQwMTUzfQ.-JBMP8ZnRkOHC-4FSRWdCCX0zgOFbfHiKeyMkqRcMoU",
+
+"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjhlOWM5MjIzNDdiMDAxNmQ0MThkZiIsInRva2VuSWQiOiI2ZGFkY2FlOS0yYzgxLTRjZWYtYmMwMC04Nzg4M2ZiOWFjMzciLCJpYXQiOjE2NjM2MjU3NTMsImV4cCI6MTY2MzY0MTk1M30.P4GigaWCsDHh6EsQVDKRtxXsfW71dyyqFAwiguXP8Qs",

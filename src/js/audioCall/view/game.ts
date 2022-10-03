@@ -1,19 +1,27 @@
 import { wordType, answerData } from '../type';
+import { GameNameType } from '../../statistics/types';
 import Step from './step';
 import Chank from '../model/chank';
 import LocalStat from './localStat';
 import Render from './render';
 
+import { StatData } from '../../statistics/Model/statData';
+import { Agregator } from '../../statistics/Model/agregator';
+
 class Game extends Step {
+  gameName: GameNameType;
   collection: Array<wordType> | undefined;
   wrapper: HTMLElement;
   startButton: HTMLElement;
   startScreen: HTMLElement;
   localStat: LocalStat;
+  statData: StatData;
 
   constructor() {
     super();
+    this.gameName = 'audioCall';
     this.localStat = new LocalStat();
+    this.statData = new StatData();
     this.wrapper = document.querySelector('.audioCall') as HTMLElement;
     this.startButton = document.querySelector('.audioCall__start-btn') as HTMLElement;
     this.startScreen = document.querySelector('.audioCall__start-container') as HTMLElement;
@@ -26,6 +34,9 @@ class Game extends Step {
       this.hideStartScreen();
       this.collection = await new Chank(page, group).getCollection();
       this.next();
+
+      // this.statData.resetDayAnswers(this.gameName); // temporarry
+      // this.statData.resetAllStat(); // temporarry
     } catch (err) {
       console.warn(err);
     }
@@ -74,6 +85,7 @@ class Game extends Step {
   }
 
   listen() {
+    // play audio on click
     this.wrapper.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
       const audioWrapper = target.closest('[data-audio]') as HTMLElement;
@@ -83,27 +95,72 @@ class Game extends Step {
         void audioEl.play();
       }
     });
-
+    // start game on click
     this.startButton.addEventListener('click', () => {
       const selectorEl = this.startScreen.querySelector('select') as HTMLSelectElement;
       const wordsGroup = Number(selectorEl.value);
       const randomWordsPage = () => Math.floor(Math.random() * 29 + 1);
       this.startGame(wordsGroup, randomWordsPage()).catch((err) => console.warn(err));
     });
-
+    // handle on choose word (radio button)
     this.wrapper.addEventListener('change', (e) => {
-      this.showTips();
-      this.disableChoice();
-      this.localStat.registerAnswer(e);
-      setTimeout(() => {
-        if (this.hasNext()) {
-          this.next();
-        } else {
-          this.showResults();
-        }
-      }, 1000);
+      if ((e.target as HTMLInputElement).name === 'choiceOption') {
+        this.showTips();
+        this.disableChoice();
+        const answerData = this.localStat.registerAnswer(e);
+        // write in history
+        this.statData.addAnswer('audioCall', answerData);
+        this.statData.addWordsHistory('audioCall', answerData);
+        console.dir(this.statData.stat);
+
+        setTimeout(() => {
+          if (this.hasNext()) {
+            this.next();
+          } else {
+            this.showResults();
+            this.statData.saveStat().catch((err) => console.warn(err));
+
+            // test agregator
+            // const agregator = new Agregator(this.statData.stat);
+            // const dayAnswers = agregator.getDayAnswers('audioCall');
+            // console.log('dayAnswers: ', dayAnswers);
+          }
+        }, 1000);
+      }
     });
   }
 }
 
+import { StatDataType } from '../../statistics/types';
+
+const testData: StatDataType = {
+  learnedWords: 0,
+  optional: {
+    wordsHistory: {
+      passedWords: ['234234'],
+      newWordsByDate: { ['some_day']: ['111'] },
+    },
+    learning: {
+      audioCall: {
+        answersHistory: {
+          ['some_day']: [{ wordId: '11', correctness: true }],
+        },
+      },
+      sprint: {
+        answersHistory: {},
+      },
+    },
+  },
+};
+
 export const game = new Game();
+
+// const stat = new StatData();
+// stat.resetAllStat(); // clear statistics
+// stat.stat = testData; // save test data
+
+// stat
+//   // .saveStat()
+//   .getStat()
+//   .then((data) => console.dir(data))
+//   .catch((err) => console.log(err));

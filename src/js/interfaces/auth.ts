@@ -1,5 +1,5 @@
 export interface Auth {
-  massage: string;
+  message: string;
   token: string;
   refreshToken: string;
   userId: string;

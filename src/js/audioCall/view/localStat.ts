@@ -7,16 +7,15 @@ class LocalStat {
   constructor() {
     this.answersStorage = [];
   }
-  registerAnswer(changeEvent: Event): void {
-    const radioEl = changeEvent.target;
-    if (radioEl instanceof HTMLInputElement) {
-      const form = radioEl.closest('form') as HTMLFormElement;
-      const targetWordId = form.dataset.targetWordId as string;
-      const answerWordId = radioEl.value;
-      const isAnswerCorrect = targetWordId === answerWordId;
+  registerAnswer(changeEvent: Event): { wordId: string; correctness: boolean } {
+    const radioEl = changeEvent.target as HTMLInputElement;
+    const form = radioEl.closest('form') as HTMLFormElement;
+    const targetWordId = form.dataset.targetWordId as string;
+    const answerWordId = radioEl.value;
+    const isAnswerCorrect = targetWordId === answerWordId;
 
-      this.saveAnswerResult(targetWordId, isAnswerCorrect);
-    }
+    this.saveAnswerResult(targetWordId, isAnswerCorrect);
+    return { wordId: targetWordId, correctness: isAnswerCorrect };
   }
 
   saveAnswerResult(targetWordId: string, isCorrect: boolean) {

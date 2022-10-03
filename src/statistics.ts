@@ -1,2 +1,2 @@
-import './js/statistics/statistics';
+import './js/statistics/stat';
 import './index';
